@@ -6,6 +6,8 @@
 @media only screen and (max-width: 600px) {
     body{
         background-color: #0B2F9F ;
+        /* background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(179,193,196,1) 100%); */
     }
 
     #optionSelection{

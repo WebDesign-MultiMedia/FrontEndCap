@@ -11,7 +11,7 @@ function App() {
   const Yerr = "Yerr World :)";
   
   return (
-  <>
+  <>       
   <Navbar />
 <Routes>
   <Route path='/' element={  <RecordLog/> } />
