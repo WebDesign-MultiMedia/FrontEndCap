@@ -1,14 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
+import Navbar from './Navbar';
 
 Chart.register(...registerables);
 
 const MyChart = () => {
 
+  const [mydata, setMyData] = useState([]);
+  
+//  useEffect(()=>{
+//   async function fetchMaintenanceRepaiData(){
+//     try {
+//       const response = await fetch("http://localhost:8080/MaintenanceRepairs");
+//       const data = await response.json();
+//       setMyData(data);
+//     } catch (error) {
+//       console.error(error); 
+//     }
+//   }
+//   fetchMaintenanceRepaiData();
+//  }, [])
+//  console.log(mydata);
+
+
     const chart1Ref = useRef(null);
   const chartRef = useRef(null);
 
   useEffect(() => {
+    
     // Maintenance and Repairs Chart
     const ctx1 = chart1Ref.current.getContext('2d');
     new Chart(ctx1, {
@@ -53,7 +72,7 @@ const MyChart = () => {
   return (
 
     <div>
-
+        <Navbar/>
             <h1 id='chartH1'>Monitor</h1>
 
       <div className="test">
