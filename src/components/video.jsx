@@ -4,7 +4,6 @@ import vd2 from '../assets/getStarted.mp4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCoffee, faFolderOpen, faUserAlt } from '@fortawesome/free-solid-svg-icons'; // Import the icon you want to use
 import { Link } from 'react-router-dom';
-import Login from './Login';
 import HomeNavbar from './beforeLoginNav';
 
 const bg = () => {
