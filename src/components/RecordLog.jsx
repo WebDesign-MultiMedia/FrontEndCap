@@ -427,6 +427,8 @@ const handleSubmitInsurLog = async (e) => {
         </div>
       )}
 
+ 
+
     </div>
 
     <Footer/>

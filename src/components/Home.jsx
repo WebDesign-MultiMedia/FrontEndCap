@@ -18,6 +18,7 @@ import CustomerSupport from './CustomerSupport'
 // import Footer from "./Footer";
 // import Camera from "./Camera";
 // import WebcamStreamCapture from "./VideoCapture";
+
 const Homes = () =>{
 
 
@@ -29,6 +30,7 @@ const Homes = () =>{
       <div className="bg-black min-h-screen ">     
         <Navbar /> 
       <RecordLog/>
+      <AutoParts/>
 
 
       {/* <Footer/> */}

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCarOn, faChartPie, faFileInvoice, faGaugeMed } from '@fortawesome/free-solid-svg-icons';
 import validation from "./LoginVal";
 import Home from "./Home";
+import Bg from "./video"
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -52,6 +53,7 @@ const Login = () => {
 
   return (
     <>
+     <Bg />
       <div className="flex justify-center space-x-4 flex-wrap h-14 bg-black">
         <FontAwesomeIcon icon={faFileInvoice} className="text-3xl text-white pr-4 relative top-5" />
         <FontAwesomeIcon icon={faChartPie} className="text-3xl text-white pr-10 relative top-5" />

@@ -5,17 +5,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Home', href: '/Home', current: true },
-  { name: 'Expenses', href: '/Expenses', current: false },
-  { name: 'Vids & Img ', href: '/VideoImageLog', current: false },
-  { name: 'Logs', href: '/vehicleTrackerPage', current: false },
+
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Navbar = () => {
+const HomeNavbar = () => {
   return (
     <>
       <nav className="border-gray-200 dark:bg-red-900 bg-black">
@@ -26,7 +23,7 @@ const Navbar = () => {
           </a>
           <div className="hidden sm:flex items-center space-x-6">
             <a href="tel:5541251234" className="text-sm text-gray-100 dark:text-white hover:underline no-underline">(347) 490-5546</a>
-            <a href="#" className="text-md text-blue-600 dark:text-blue-500 hover:underline hover:text-white no-underline">Login</a>
+            <Link to="/Login" className="text-md text-blue-600 dark:text-blue-500 hover:underline hover:text-white no-underline">Login</Link>
           </div>
         </div>
       </nav>
@@ -97,4 +94,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default HomeNavbar;
