@@ -23,19 +23,19 @@ const Navbar = () => {
     <>
     
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class=" border-gray-200 dark:bg-red-900 bg-black ">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-        <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse no-underline">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <span class="self-center font-semibold whitespace-nowrap dark:text-white text-3xl">V Tracker</span>
         </a>
         <div class="flex items-center space-x-6 rtl:space-x-reverse">
-            <a href="tel:5541251234" class="text-sm  text-gray-500 dark:text-white hover:underline">(555) 412-1234</a>
-            <a href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+            <a href="tel:5541251234" class="text-sm  text-gray-100 dark:text-white hover:underline no-underline">(347) 490-5546</a>
+            <a href="#" class="text-md  text-blue-600 dark:text-blue-500 hover:underline hover:text-white no-underline">Login</a>
         </div>
     </div>
 </nav>
-<nav class=" dark:bg-gray-700 abs">
+<nav class=" bg-gray-900 ">
     <div class="max-w-screen-xl px-4 py-3 mx-auto">
         <div class=" flex items-center justify-center  ">
         {navigation.map((item) => (
@@ -43,8 +43,8 @@ const Navbar = () => {
               key={item.name}
               to={item.href}
               className={classNames (
-                item.current ? 'text-red-900 dark:text-white' : 'text-black hover:bg-blue-200 dark:text-gray-400',
-                'px-2 w-52 no-underline py-2 rounded-md text-sm font-medium'
+                item.current ? 'text-blue-400 dark:text-white sm:text-2xl hover:bg-blue-200 sm:text-white': 'text-blue-400  font-semibold hover:bg-red-600 sm:hover:bg-gray-700 hover:text-green-300 sm:hover:text-white sm:text-2xl ',
+                'px-2 w-40 text-center no-underline py-2 rounded-md text-lg font-medium'
               )}
               aria-current={item.current ? 'page' : undefined}
             >

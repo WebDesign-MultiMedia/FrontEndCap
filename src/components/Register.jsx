@@ -24,17 +24,82 @@ const Registers = () =>{
       setValues(prev => ({...prev, [e.target.name]: [e.target.value]}))
    }
 
-   const handleSubmit = (e) =>{
+   const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [RegisterData, setRegisterData] = useState('');
+
+   const handleSubmit = async (e) =>{
       e.preventDefault();
 
-  const validationErrors = validation(values);
-  setErrors(validationErrors);
+      const UserRegisInfo = {firstName, lastName, email, password }
 
-      if (Object.keys(validationErrors).length === 0) {
-        axios.post('http://localhost:8080/Register/Register', values)
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
+      try {
+        // Send both POST requests at the same time
+        const [registerResponse, loginResponse] = await Promise.all([
+          fetch("http://localhost:8080/Register/add", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(UserRegisInfo),
+          }),
+          fetch("http://localhost:8080/Logins/add", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(UserRegisInfo), // You can modify this if login data is different
+          })
+        ]);
+    
+        if (registerResponse.ok && loginResponse.ok) {
+          const registerData = await registerResponse.json();
+          const loginData = await loginResponse.json();
+          console.log('User registered:', registerData);
+          console.log('User logged in:', loginData);
+          
+          setRegisterData(registerData);
+          setFirstName('');
+          setLastName('');
+          setEmail('');
+          setPassword('');
+          
+          alert("Registration and Login Successful");
+          window.location.href = "/Login";
+        } else {
+          console.log("Failed to register or log in the user.");
+        }
+      } catch (error) {
+        console.log("An error occurred:", error);
       }
+  
+      // try{
+      //   const response = await fetch("http://localhost:8080/Register/add",{
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(UserRegisInfo),
+      //     });
+
+      //     if(response.ok){
+      //       const data = await response.json();
+      //       console.log('User has Resgistered', data);
+      //       setRegisterData(data);
+      //       setFirstName('');
+      //       setLastName('');
+      //       setEmail('');
+      //       setPassword('');
+      //   } else{
+      //     console.log("Failed to add your registration");
+      //   } 
+      // } catch (error){
+      //   console.log("Failed to add your registration");
+      // }
+      alert("Registration Successful");
+      window.location.href = "/Login";
    }
 
     return(
@@ -62,12 +127,11 @@ const Registers = () =>{
         </label>
         <input  
         id='firstName'
-        autoComplete='name'
+
           className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          // value= firstName
           name='firstName'
-          // onChange={(e) => setFirstName(e.target.value)}
-          onChange={handleInput}
+          onChange={(e) => setFirstName(e.target.value)}
+          value={firstName}
           placeholder="First name"
         />
   {errors.firstName && <span className="text-red-600 absolute left-20 ">{errors.firstName}</span>}
@@ -77,14 +141,12 @@ const Registers = () =>{
       <div className="Field">
         <label className="block text-sm font-medium text-white" htmlFor="lastName">Last name</label>
         <input 
-        autoComplete='name'
+
           className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value='lastName'
+          value={lastName}
           id='lastName'
           name='lastName'
-          // onChange={(e) => setLastName(e.target.value)}
-          onChange={handleInput}
-       
+          onChange={(e) => setLastName(e.target.value)}
         />
           {errors.lastName && <span className="text-red-600 absolute left-20">{errors.lastName}</span>}
 
@@ -98,9 +160,8 @@ const Registers = () =>{
         id='email'
         autoComplete='email'
           className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          // value={"email"}
-        onChange={handleInput}
-          // onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
           placeholder="Email address"
           name="email"
         />
@@ -116,55 +177,14 @@ const Registers = () =>{
         id='password'
           className="text-red-400 mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="password"
-          // value={"password"}
-          onChange={handleInput}
-          // onChange={(e) => setPassword({ ...password, value: e.target.value })}
-          // onBlur={() => setPassword({ ...password, isTouched: true })}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
           placeholder="Password"
           name="password"
         />
           {errors.password && <span className="text-red-600 absolute left-24">{errors.password}</span>}
       </div>
-
-      {/* <div className="Field">
-        <label className="block text-sm font-medium text-gray-700" htmlFor="confirmPassword">
-          Confirm Password <sup>*</sup>
-        </label>
-        <input
-        id='confirmPassword'
-          className="text-red-400 mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="password"
-          value={confirmPassword.value}
-          onChange={(e) => setConfirmPassword({ ...confirmPassword, value: e.target.value })}
-          onBlur={() => setConfirmPassword({ ...confirmPassword, isTouched: true })}
-          placeholder="Confirm Password"
-          name='confirmPassword'
-        />
-    {confirmPassword.isTouched && confirmPassword.value !== password.value  ? (
-              <span className="text-red-500">Passwords do not match.</span>
-            ) : null}
-      </div> */}
-
-      <div className="Field">
-        <label className="block text-sm font-medium text-white" htmlFor="role">
-          Role <sup>*</sup>
-        </label>
-        <select 
-        id='role'
-        autoComplete='role'
-          className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-red-600"
-          value={"role"} 
-          // name='role'
-          //  onChange={(e) => setRole(e.target.value)}    
-          onChange={handleInput}
-        >
-          <option value="role">Role</option>
-          <option value="individual">Individual</option>
-          <option value="business">Business</option>
-        </select>
-        
-      </div>
-
+  
       <button
         type="submit"
         className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition duration-300 disabled:bg-gray-300"> 
@@ -172,7 +192,7 @@ const Registers = () =>{
       </button>
     {/* {success && <p className="text-green-500 mt-4">Registration successful!</p>} */}
 
-      <Link to="/"  className=" no-underline text-blue-700 bg-white inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200"> Login </Link>
+      <Link to="/Login"  className=" no-underline text-blue-700 bg-white inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200"> Login </Link>
     </fieldset>
   </form>
 </div>

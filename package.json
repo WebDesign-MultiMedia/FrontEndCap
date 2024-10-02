@@ -27,10 +27,13 @@
     "frontendcapstone": "file:",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
+    "react-big-calendar": "^1.14.1",
     "react-bootstrap": "^2.10.4",
     "react-charts": "^3.0.0-beta.57",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "react-webcam": "^7.2.0",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

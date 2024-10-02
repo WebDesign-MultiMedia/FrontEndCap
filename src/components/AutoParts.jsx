@@ -1,6 +1,7 @@
 import { Colors } from "chart.js";
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 function AutoParts(){
     const stats = [
         { id: 1, name: 'AutoAzome', value: 'AutoZone', link:"https://www.autozone.com/",  imageSrc: 'https://www.autozone.com/images/az-logo-full.svg' },
@@ -23,36 +24,58 @@ function AutoParts(){
     return(
         <>
           <Navbar/>
-     <h1 className="text-center text-3xl sm:text-4xl lg:text-3xl font-bold relative">After-Market Auto Parts</h1>
-  <div className="bg-white py-16 sm:py-24 lg:py-32">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-green-400">
+
+<div className="bg-black min-h-screen  text-white pt-2">
+
+<h1 className="text-center text-3xl sm:text-4xl lg:text-3xl font-bold relative">Vehicle Owner Guides</h1>
+<div className="py-12 sm:py-20 lg:py-24 ">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+      {howTo.map((howTos) => (
+        <a href={howTos.link} key={howTos.name} className="block group no-underline">
+          <img
+            src={howTos.imageSrc}
+            alt={howTos.name}
+            className="w-40 sm:w-48 lg:w-60 mx-auto transition-transform duration-200 group-hover:scale-105"
+          />
+          <h3 className="text-red-500 shadow-red-500 shadow-inner sm:text-pink-500 lg:w-96 lg:text-green-200   text-base mt-4 sm:text-lg lg:text-xl">{howTos.name}</h3>
+        </a>
+      ))}
+    </dl>
+  </div>
+</div>
+
+
+     <h1 className="text-center text-3xl sm:text-4xl lg:text-3xl font-bold relative">Auto Parts Shopping</h1>
+  <div className="py-16 sm:py-24 lg:py-32 ">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-green-400 ">
       <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 lg:grid-cols-3 relative bottom-5">
         {stats.map((stat) => (
-          <a href={stat.link} key={stat.name} className="block group">
+          <a href={stat.link} key={stat.name} className="block group no-underline">
             <img 
               src={stat.imageSrc}   // Set image source to AutoZone logo or other images
               alt={stat.name}        // Alt text for accessibility
               className="w-40 sm:w-48 lg:w-60 mx-auto transition-transform duration-200 group-hover:scale-105"
             />
-            <h3 className="text-red-600 text-base mt-4 sm:text-lg lg:text-xl">{stat.name}</h3>
+            <h3 className="text-blue-500 shadow-red-500 shadow-inner text-base mt-4 sm:text-lg lg:text-xl">{stat.name}</h3>
           </a>
         ))}
       </dl>
     </div>
   </div>
 
-  <h1 className="text-center text-3xl sm:text-4xl lg:text-3xl font-bold relative">Performance Auto Parts</h1>
-<div className="bg-white py-16 sm:py-24 lg:py-32">
+
+<div className=" py-16 sm:py-24 lg:py-32">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 text-center">
       {performanceAutoParts.map((performance) => (
-        <a href={performance.link} key={performance.name} className="block group">
+        <a href={performance.link} key={performance.name} className="block group no-underline">
           <img
             src={performance.imageSrc}
             alt={performance.name}
             className="w-40 sm:w-48 lg:w-60 mx-auto transition-transform duration-200 group-hover:scale-105"
           />
-          <h3 className="text-red-600 text-base mt-4 sm:text-lg lg:text-xl">{performance.name}</h3>
+          <h3 className="text-blue-500 shadow-red-500 shadow-inner text-base mt-4 sm:text-lg lg:text-xl">{performance.name}</h3>
         </a>
       ))}
     </dl>
@@ -62,24 +85,10 @@ function AutoParts(){
    
    
    
-<h1 className="text-center text-3xl sm:text-4xl lg:text-3xl font-bold relative">Vehicle Owner Guides</h1>
-<div className="py-12 sm:py-20 lg:py-24">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
-      {howTo.map((howTos) => (
-        <a href={howTos.link} key={howTos.name} className="block group">
-          <img
-            src={howTos.imageSrc}
-            alt={howTos.name}
-            className="w-40 sm:w-48 lg:w-60 mx-auto transition-transform duration-200 group-hover:scale-105"
-          />
-          <h3 className="text-red-600 text-base mt-4 sm:text-lg lg:text-xl">{howTos.name}</h3>
-        </a>
-      ))}
-    </dl>
-  </div>
+
 </div>
 
+<Footer/>
 
         </>
     )

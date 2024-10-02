@@ -11,15 +11,34 @@ import RecordLog from './RecordLog';
 import AutoParts from './AutoParts'
 // import VehicleTracker from './vehicleTrackerPage'
 // import Login  from "./Login";
+import bgimgVid from './video'
+// import Calendar from './Calender'
+
+import CustomerSupport from './CustomerSupport'
+// import Footer from "./Footer";
+// import Camera from "./Camera";
+// import WebcamStreamCapture from "./VideoCapture";
 const Homes = () =>{
 
 
     return(
         <>
-      <Navbar /> 
-      <RecordLog/>
-      <AutoParts/>
 
+
+        
+      <div className="bg-black min-h-screen ">     
+        <Navbar /> 
+      <RecordLog/>
+
+
+      {/* <Footer/> */}
+      </div>
+ 
+      {/* <CustomerSupport/> */}
+      {/* <Calendar/> */}
+
+      
+        
       {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
