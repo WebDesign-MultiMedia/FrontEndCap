@@ -2,6 +2,7 @@ import '/src/App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState , useEffect} from 'react';
 import Footer from './Footer';
+import Font from 'react-font';
 
 const RecordLog = () => {
 
@@ -173,47 +174,109 @@ const handleSubmitInsurLog = async (e) => {
   const [note_Issues, setNote_Issues] = useState('');
   const [myManRepData, setMyManRepData] = useState([]);
 
+
+
+
+
   const handleSubmitManRep = async (e) => {
     e.preventDefault();
 
-     const vehicleManRepairData = { date, mileage, maintenance_repair, parts, vehicleSide, serviceProvider, serviceProviderLocation, costOfService, nextServiceDue, receipt_InvoiceNumber, note_Issues};
+    const vehicleManRepairData = {
+      date,
+      mileage,
+      maintenance_repair,
+      parts,
+      vehicleSide,
+      serviceProvider,
+      serviceProviderLocation,
+      costOfService,
+      nextServiceDue,
+      receipt_InvoiceNumber,
+      note_Issues
+    };
 
-    try {
-      const response = await fetch("http://localhost:8080/MaintenanceRepairs/add", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(vehicleManRepairData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('maintenance_repair information added:', data);
-        setMyManRepData(data);
-      setDate('');
-      setMileage('');
-      setMaintenance_repair('');
-      setParts('');
-      setVehicleSide('');
-      setServiceProvider('');
-      setServiceProviderLocation('');
-      setCostOfService('');
-      setNextServiceDue('');
-      setReceipt_InvoiceNumber('');
-      setNote_Issues('');
-        // You can add more logic here, like resetting the form or displaying a success message.
-      } else {
-        console.error('Failed to add vehicle information');
+      try {
+        // Create both fetch requests
+        const sheetDBRequest = fetch("https://sheetdb.io/api/v1/am2i3k26ig8ui", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(vehicleManRepairData),
+        });
+    
+        const localServerRequest = fetch("http://localhost:8080/MaintenanceRepairs/add", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(vehicleManRepairData),
+        });
+    
+        // Use Promise.all to send both requests concurrently
+        const [sheetDBResponse, localServerResponse] = await Promise.all([sheetDBRequest, localServerRequest]);
+    
+        // Handle SheetDB Response
+        if (sheetDBResponse.ok) {
+          const sheetDBData = await sheetDBResponse.json();
+          console.log('SheetDB maintenance_repair information added:', sheetDBData);
+        } else {
+          console.error('Failed to add vehicle information to SheetDB');
+        }
+    
+        // Handle Local Server Response
+        if (localServerResponse.ok) {
+          const localServerData = await localServerResponse.json();
+          console.log('Local server maintenance_repair information added:', localServerData);
+        } else {
+          console.error('Failed to add vehicle information to local server');
+        }
+    
+        // Reset form fields after successful submission
+        setMyManRepData(vehicleManRepairData);
+        setDate('');
+        setMileage('');
+        setMaintenance_repair('');
+        setParts('');
+        setVehicleSide('');
+        setServiceProvider('');
+        setServiceProviderLocation('');
+        setCostOfService('');
+        setNextServiceDue('');
+        setReceipt_InvoiceNumber('');
+        setNote_Issues('');
+      } catch (error) {
+        console.error('Error occurred while sending data:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    
+    
+
+  //   try{
+  //      const GSres = await fetch("http://localhost:8080/GasStations/add", {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(vehicleManRepairData),
+  //   });
+  //   if (response.ok) {
+  //     const result = await response.json();
+  //     console.log('Data successfully sent to Google Sheet:', result);
+  //   } else {
+  //     console.error('Failed to send data to Google Sheet');
+  //   }
+  // } catch (error) {
+  //   console.error('Error:', error);
+  // }
+
+
 
     alert('maintenance_repair information added successfully');
 
     window.location.reload();
   };
+  
+
   
   return (
     <>
@@ -224,18 +287,18 @@ const handleSubmitInsurLog = async (e) => {
     
       {/* Dropdown for form selection */}
       <div id="" className=" flex flex-col items-center ">
-        <select
-          className="bg-gray-900 text-white top-2 relative w-52 text-center appearance-none  border border-green-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline "
+       <Font family='Libre Baskerville'> <select
+          className="bg-gray-900  text-white top-2 relative w-52 text-center appearance-none  border border-green-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline "
           onChange={handleFormChange}
           value={selectedForm}
         >
-          <option value="">Select an Option:</option>
+          <option value=""  >Select an Option:</option>
           <option value="vehicleInformation">Vehicle Information</option>
           <option value="maintenanceAndRepair">Maintenance & Repairs</option>
           <option value="fuelRecord">Vehicle Fuel</option>
           {/* <option value="vehicleRegistration">Vehicle Registration</option> */}
           <option value="insuranceRecords">Vehicle Insurance</option>
-        </select>
+        </select> </Font>
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg
             className="fill-current h-4 w-4"
@@ -433,6 +496,7 @@ const handleSubmitInsurLog = async (e) => {
 
     <Footer/>
     </>
+  
   );
 };
 

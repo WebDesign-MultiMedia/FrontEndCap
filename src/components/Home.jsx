@@ -13,12 +13,12 @@ import AutoParts from './AutoParts'
 // import Login  from "./Login";
 import bgimgVid from './video'
 // import Calendar from './Calender'
-
+import video from './video'
 import CustomerSupport from './CustomerSupport'
 // import Footer from "./Footer";
 // import Camera from "./Camera";
 // import WebcamStreamCapture from "./VideoCapture";
-
+import Monitor from './Monitor'
 const Homes = () =>{
 
 
@@ -28,8 +28,9 @@ const Homes = () =>{
 
         
       <div className="bg-black min-h-screen ">     
-        <Navbar /> 
-      <RecordLog/>
+        <Navbar/>
+        <RecordLog/>
+                <Monitor/>
       <AutoParts/>
 
 
@@ -41,12 +42,7 @@ const Homes = () =>{
 
       
         
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Login />} />
-      </Routes> */}
+      
 
 </>
     )

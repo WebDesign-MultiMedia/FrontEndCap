@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faEraser, faCircle, faStop } from '@fortawesome/free-solid-svg-icons';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import Font from 'react-font';
 
 const VidCamCapture = () => {
   const webcamRef = useRef(null);
@@ -97,16 +98,17 @@ const VidCamCapture = () => {
 
   return (
     <>
+    <div className=''>
 
     <Navbar />
 
-    <div className="flex flex-col items-center min-h-screen bg-gray-900 text-white p-4">
-      <h1 className="text-3xl font-bold mb-8">Webcam Capture</h1>
+    <div className="flex flex-col items-center min-h-screen bg-gray-900  text-white p-4">
+      <Font family='Josefin Slab'> <h1 className="text-4xl font-thin mb-8"> Captures</h1></Font>
 
-      <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" className="rounded-lg shadow-lg mb-4" />
+      <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" className="rounded-lg shadow-lg mb-4 w-80" />
 
       <div className="flex space-x-4 mb-4">
-        <button onClick={capture} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md transition duration-200">
+       <Font family='Libre Baskerville'> <button onClick={capture} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md transition duration-200">
           Capture Photo
         </button>
         {recording ? (
@@ -123,8 +125,8 @@ const VidCamCapture = () => {
         {recordedChunks.length > 0 && (
           <button onClick={saveVideo} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md transition duration-200">
             Save Video
-          </button>
-        )}
+          </button> 
+        )}</Font>
       </div>
 
       {/* Dropdown to toggle between displaying images and videos */}
@@ -141,8 +143,8 @@ const VidCamCapture = () => {
 
       {/* Conditional rendering for images or videos */}
       {view === 'images' && (
-        <div className="mt-8 w-full max-w-4xl">
-          <h2 className="text-2xl font-semibold mb-4">Saved Images</h2>
+        <div className="mt-8 w-full max-w-4xl h-96">
+          <Font family='Josefin Slab'>  <h2 className="text-2xl font-bold mb-4">Saved Images</h2></Font>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {images.length > 0 && images.map((img, index) => (
               <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-lg">
@@ -164,8 +166,8 @@ const VidCamCapture = () => {
       )}
 
       {view === 'videos' && (
-        <div className="mt-8 w-full max-w-4xl">
-          <h2 className="text-2xl font-semibold mb-4">Saved Videos</h2>
+        <div className="mt-8 w-full max-w-4xl h-96 ">
+         <Font family='Josefin Slab'> <h2 className="text-2xl font-bold mb-4">Saved Videos</h2></Font>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {savedVideos.map((videoUrl, index) => (
               <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-lg">
@@ -183,6 +185,7 @@ const VidCamCapture = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
     <Footer />
     </>

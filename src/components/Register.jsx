@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCarOn, faChartPie, faFileInvoice, faGaugeMed, faGaugeSimpleHigh } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import validation from "./RegisterVal"
+import Font from 'react-font';
 
 const Registers = () =>{
  
@@ -112,7 +113,7 @@ const Registers = () =>{
     <FontAwesomeIcon icon={faCarOn} className="text-3xl text-white pl-5 relative top-5"/>
   </div>
 
-
+<Font family='Graduate'>
     <div className="App flex items-center justify-center min-h-screen bg-black">
   <form 
     onSubmit={handleSubmit} htmlFor="Reg"
@@ -196,7 +197,7 @@ const Registers = () =>{
     </fieldset>
   </form>
 </div>
-
+</Font>
 
         </>
     );

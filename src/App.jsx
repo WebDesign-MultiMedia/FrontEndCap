@@ -11,7 +11,10 @@ import Registers from './components/Register';
 import AutoParts from './components/AutoParts';
 import VidCamCapture from './components/VideoImageLog';
 import HomeNavbar from './components/beforeLoginNav';
-
+import Bg from './components/video';
+import Navbar from './components/Navbar';
+import VideoImageLog from './components/VideoImageLog';
+import CustomerSupportForm from './components/CustomerSupport';
 
 // import YourComponent from './components/VinDecoder';
 
@@ -21,21 +24,18 @@ return(
   <>
 
 
-
-
+    <Routes>
+      <Route path="/" element={<Bg/>}></Route>
+      <Route path="/vehicleTrackerPage" element={<VehicleTracker/>}></Route>
+      <Route path="/VideoImageLog" element={<VideoImageLog/>}></Route>
+      <Route path="/Expenses" element={<ExpenseTracker/>}></Route>
+               <Route path='/Register' element={<Registers/>} />
+               <Route path="/Login" element={<Login/>} />
+               <Route path="/Home" element={<Home/>} />
+                <Route path="/AutoParts" element={<AutoParts/>} />
+                <Route path="/CustomerSupport" element={<CustomerSupportForm/>} />
+                </Routes>
     
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/beforeLoginNav" element={<HomeNavbar />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/AutoParts" element={<AutoParts />} />
-        <Route path="/register" element={<Registers />} />
-        <Route path="/vehicleTrackerPage" element={<VehicleTracker />} />
-        <Route path="/Expenses" element={<ExpenseTracker />} />
-        <Route path="/VideoImageLog" element={<VidCamCapture />} />
-
-        </Routes>
 
     
 

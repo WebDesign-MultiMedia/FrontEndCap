@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '/src/index.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
-
+import Font from 'react-font';
 
 
 const ExpenseTracker = () => {
@@ -51,6 +51,8 @@ const ExpenseTracker = () => {
         updateSummary();
     }, [mydata]);
 
+
+
     const handleAddItem = async () => {
         if (!name || amount <= 0 || !itemType) {
             alert("Please enter valid data");
@@ -61,29 +63,54 @@ const ExpenseTracker = () => {
             name,
             amount,
             type: itemType,
-        };
-
-        try {
-            const response = await fetch("http://localhost:8080/ExpensesLogs/add", {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newItem),
+          };
+        
+          try {
+            // Create both fetch requests
+            const sheetDBRequest = fetch("https://sheetdb.io/api/v1/a270zvbrqge0t", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(newItem),
             });
-
-            if (response.ok) {
-                const updatedData = await response.json();
-                setMyData(updatedData);
-                setName('');
-                setAmount(0);
-                setItemType('');
+        
+            const localServerRequest = fetch("http://localhost:8080/ExpensesLogs/add", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(newItem),
+            });
+        
+            // Use Promise.all to send both requests concurrently
+            const [sheetDBResponse, localServerResponse] = await Promise.all([sheetDBRequest, localServerRequest]);
+        
+            // Handle SheetDB Response
+            if (sheetDBResponse.ok) {
+              const sheetDBData = await sheetDBResponse.json();
+              console.log('SheetDB information added:', sheetDBData);
             } else {
-                console.error('Failed to add item');
+              console.error('Failed to add data to SheetDB', await sheetDBResponse.text());
             }
-        } catch (error) {
-            console.error(error);
-        }
+        
+            // Handle Local Server Response
+            if (localServerResponse.ok) {
+              const localServerData = await localServerResponse.json();
+              console.log('Local server information added:', localServerData);
+            } else {
+              console.error('Failed to add data to local server', await localServerResponse.text());
+            }
+        
+            // Reset form fields after successful submission
+            setMyData(newItem);
+            setName('');
+            setAmount(0);
+            setItemType('');
+        
+          } catch (error) {
+            console.error('Error occurred while sending data:', error);
+          }
 
         alert("Entry added successfully");
         window.location.reload();
@@ -115,13 +142,15 @@ const ExpenseTracker = () => {
 
     return (
         <>
+        <Navbar />
             <div className='bg-black min-h-screen'>
-                <Navbar />
+
                 <div className="summary p-4 sm:p-8">
-                    <h1 id="balanceTitle" className="text-2xl sm:text-3xl font-bold text-center text-yellow-400">
+                 <Font family='Josefin Slab'>   <h1 id="balanceTitle" className="text-2xl sm:text-3xl font-bold text-center text-yellow-400">
                         &#10004; Balance: <span id="updatedBal">${summary.balance.toFixed(2)}</span>
-                    </h1>
+                    </h1></Font>
                     <br />
+                    <Font family='Libre Baskerville'>
                     <div className="total flex justify-around items-center w-full text-center">
                         <div className="text-lg sm:text-xl text-gray-50">
                             Total Income:
@@ -132,16 +161,16 @@ const ExpenseTracker = () => {
                             Total Expenses:
                             <h2 className="text-red-500" id="updatedExp">${summary.totalExpense.toFixed(2)}</h2>
                         </div>
-                    </div>
+                    </div></Font>
 
                     <div className="root mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div id="items" className="space-y-4">
-                            <h2 className="text-xl font-semibold lg:text-center lg:text-2xl text-white text-center">Expenses</h2>
-                            <table id="table" className="w-full sm:bg-yellow-300 sm:w-6/12 sm:relative sm:left-52 lg:bg-black lg:text-white lg:font-semibold lg:text-center lg:w-9/12 lg:relative lg:left-40 table-auto border-collapse bg-yellow-100">
-                                <thead>
-                                    <tr className="titles bg-gray-600 text-yellow-500">
-                                        <th className="p-1 border">S.no.</th>
-                                        <th className="p-1 border sm:w-52" id="titleName">Name</th>
+                            <Font family='Josefin Slab'> <h2 className="text-xl font-semibold lg:text-center lg:text-2xl text-white text-center">Expenses</h2></Font>
+                           <Font family='Josefin Slab'>    <table id="table" className="w-full sm:bg-yellow-300 sm:w-6/12 sm:relative sm:left-52 lg:bg-gray-900 lg:text-white lg:font-semibold lg:text-center lg:w-9/12 lg:relative lg:left-40 table-auto border-collapse text-white">
+                               <thead>
+                                   <tr className="titles bg-gray-600 text-yellow-400">
+                                     <th className="p-1 border">S.no.</th>
+                                       <th className="p-1 border sm:w-52" id="titleName">Name</th>
                                         <th className="p-1 border sm:w-52">Amount</th>
                                         <th className="p-1 border sm:w-40 sm:text-center">Type</th>
                                         <th className="p-1 border">Delete</th>
@@ -149,7 +178,7 @@ const ExpenseTracker = () => {
                                 </thead>
                                 <tbody>
                                     {mydata.map((entry, index) => (
-                                        <tr key={index} className="hover:bg-gray-100">
+                                        <tr key={index} className="hover:bg-red-500 text-lg">
                                             <td className="relative left-4 border">{index + 1}</td>
                                             <td className="relative left-4 border">{entry.name}</td>
                                             <td className="relative left-4 border ">${parseFloat(entry.amount).toFixed(2)}</td>
@@ -163,15 +192,15 @@ const ExpenseTracker = () => {
                                         </tr>
                                     ))}
                                 </tbody>
-                            </table>
+                            </table></Font>
                         </div>
 
                         <div id="new" className="space-y-4">
-                            <h2 className="text-xl font-semibold sm:text-red-400 md:text-green-400 lg:text-purple-400 text-white sm:text-center lg:text-left">Add new</h2>
+                            <Font family='Josefin Slab'> <h2 className="text-xl font-semibold sm:text-red-400 md:text-green-400 lg:text-purple-400 text-white sm:text-center lg:text-left text-">Add New</h2></Font>
                             <div className="inputs space-y-4 border-solid border-1 border-black lg:w-96 lg:relative lg:left-3 sm:w-6/12 sm:relative sm:left-52">
                                 <div className="inputitem flex items-center">
-                                    <p className="w-28 text-center text-white">Entry type: </p>
-                                    <select
+                                    <p className="w-28 text-center text-white font-mono">Entry type: </p>
+                                    <select 
                                         id='itemType'
                                         value={itemType}
                                         onChange={(e) => setItemType(e.target.value)}
@@ -184,11 +213,11 @@ const ExpenseTracker = () => {
                                 </div>
 
                                 <div className="inputitem flex items-center">
-                                    <p className="w-28 text-center text-white">Name:</p>
+                                    <p className="w-28 text-center text-white font-mono">Name:</p>
                                     <input
                                         id="name"
                                         type="text"
-                                        maxLength={10}
+                                        // maxLength={10}
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder="name"
@@ -197,7 +226,7 @@ const ExpenseTracker = () => {
                                 </div>
 
                                 <div className="inputitem flex items-center">
-                                    <p className="w-28 text-center text-white">Amount:</p>
+                                    <p className="w-28 text-center text-white font-mono">Amount:</p>
                                     <input
                                         id="amount"
                                         type="number"
@@ -215,7 +244,8 @@ const ExpenseTracker = () => {
                             >
                                 Add Entry
                             </button>
-              
+                            <iframe width="600" height="546" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRO2mEi3ico8P9rXa-T3uFfF2Dx8r5mVu7rLJ8nhguF9w8sMdBH4esi5QQcoQfyJ8Cr_weZW-Z4MX7e/pubchart?oid=55008347&amp;format=interactive"></iframe>
+                        
                         </div>
                     </div>
                 </div>

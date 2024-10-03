@@ -1,8 +1,12 @@
 import React from 'react'
+import BackNav from './beforeLoginNav'
 
 function CustomerSupport() {
   return (
-    <div className="container mx-auto p-4 sm:p-6 lg:p-8 flex justify-center items-center min-h-screen bg-gray-100">
+    <>
+<BackNav/>
+
+    <div className=" sm:p-6 lg:p-8 flex justify-center items-center  bg-black min-h-screen">
       <form
         action="https://public.herotofu.com/v1/77da8c70-7efa-11ef-a713-f1ff48b47695"
         method="post"
@@ -72,7 +76,8 @@ function CustomerSupport() {
         </div>
       </form>
     </div>
+    </>
   )
 }
 
-export default CustomerSupport
+export default CustomerSupport;

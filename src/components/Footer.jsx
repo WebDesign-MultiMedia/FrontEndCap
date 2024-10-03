@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
 
@@ -50,9 +51,9 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Contact
-              </a>
+              <Link to="/CustomerSupport" className="hover:underline">
+                Support Form
+              </Link>
             </li>
           </ul>
 

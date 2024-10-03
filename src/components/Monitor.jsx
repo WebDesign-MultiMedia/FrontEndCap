@@ -1,94 +1,32 @@
-// import React, { useEffect, useRef, useState } from 'react';
-// import { Chart, registerables } from 'chart.js';
-// import Navbar from './Navbar';
+import React from 'react'
+import Font from 'react-font';
+const stats = [
+    { id: 1, name: 'Transactions every 24 hours', value: '44 million' },
+    { id: 2, name: 'Assets under holding', value: '$119 trillion' },
+    { id: 3, name: 'New users annually', value: '46,000' },
+  ]
+  
+function Monitor() {
+  return (
+  <>
+ 
+    <div>
+      <div className="bg-gray-900 py-5 sm:py-32">
+      <Font family='Josefin Slab'> <h2 className='text-center text-white font-thin text-4xl'>Monitors</h2></Font>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative right-32">
+    
+        <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+            
+        <iframe className='  md:relative md:left-52' width="600" height="371" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSxa63C004L69u-_pa39VIxCc3FfF4_4-k8s4CwoMNvwVmHkeQcYfeld0TuA7UV5pHz1Z0Iiq7lEGKL/pubchart?oid=1234884701&amp;format=interactive"></iframe>
 
-// // Register all necessary components
-// Chart.register(...registerables);
+        <iframe className='  md:relative md:left-52' width="600" height="371" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRO2mEi3ico8P9rXa-T3uFfF2Dx8r5mVu7rLJ8nhguF9w8sMdBH4esi5QQcoQfyJ8Cr_weZW-Z4MX7e/pubchart?oid=1864281559&amp;format=interactive"></iframe>
 
-// const Monitor = () => {
-//   const [mydata, setMyData] = useState([]);
-//   const [error, setError] = useState(null);
-//   const chart1Ref = useRef(null);
-//   const chartInstanceRef = useRef(null);
+    </dl>
+      </div>
+    </div>
+    </div>
+    </>
+  )
+}
 
-//   useEffect(() => {
-//     const fetchMaintenanceRepairData = async () => {
-//       try {
-//         const response = await fetch('http://localhost:8080/MaintenanceRepairs'); // Replace with your API endpoint
-//         if (!response.ok) {
-//           throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const data = await response.json();
-//         setMyData(Array.isArray(data) ? data : []); // Ensure data is an array
-//       } catch (error) {
-//         console.error('Error fetching data:', error);
-//         setError(error.message);
-//         setMyData([]); // Set to empty array on error
-//       }
-//     };
-
-//     fetchMaintenanceRepairData();
-//   }, []);
-
-//   useEffect(() => {
-//     if (mydata.length === 0) return;
-
-//     const manc = mydata.filter((item) => item.type === 'Maintenance').length;
-//     const rep = mydata.filter((item) => item.type === 'Repairs').length;
-
-//     // Destroy existing chart instance if it exists
-//     if (chartInstanceRef.current) {
-//       chartInstanceRef.current.destroy();
-//     }
-
-//     // Maintenance and Repairs Chart
-//     const ctx1 = chart1Ref.current.getContext('2d');
-//     chartInstanceRef.current = new Chart(ctx1, {
-//       type: 'pie',
-//       data: {
-//         labels: ['Maintenance', 'Repairs'],
-//         datasets: [{
-//           label: 'Maintenance and Repairs',
-//           data: [manc, rep], // Add counts of Maintenance and Repairs
-//           borderWidth: 3,
-//           backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-//           borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-//         }],
-//       },
-//       options: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//       },
-//     });
-
-//     return () => {
-//       // Cleanup charts on component unmount
-//       if (chartInstanceRef.current) {
-//         chartInstanceRef.current.destroy();
-//       }
-//     };
-//   }, [mydata]);
-
-//   return (
-//     <>
-//       <Navbar />
-//       <div>
-//         <canvas ref={chart1Ref}></canvas>
-//       </div>
-//       {error ? (
-//         <div style={{ color: 'red' }}>Error: {error}</div>
-//       ) : (
-//         <div>
-//           {mydata.map((item, index) => (
-//             <div key={index}>
-//               <p>{item.name}</p>
-//               <p>{item.details}</p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </>
-//   );
-// };
-
-// export default Monitor;
+export default Monitor

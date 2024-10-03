@@ -6,6 +6,7 @@ import { faCarOn, faChartPie, faFileInvoice, faGaugeMed } from '@fortawesome/fre
 import validation from "./LoginVal";
 import Home from "./Home";
 import Bg from "./video"
+import Font from 'react-font';
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -53,7 +54,7 @@ const Login = () => {
 
   return (
     <>
-     <Bg />
+  
       <div className="flex justify-center space-x-4 flex-wrap h-14 bg-black">
         <FontAwesomeIcon icon={faFileInvoice} className="text-3xl text-white pr-4 relative top-5" />
         <FontAwesomeIcon icon={faChartPie} className="text-3xl text-white pr-10 relative top-5" />
@@ -63,16 +64,16 @@ const Login = () => {
 
       <div className="bg-black text-white flex min-h-screen flex-col items-center pb-24 sm:justify-center sm:pt-0">
         <a href="#" className="no-underline text-white">
-          <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto flex items-center gap-2 relative top-10">
-            <div>
+          <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto flex items-center gap-2 relative top-10 ">
+            <Link to='/'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672Zm-7.518-.267A8.25 8.25 0 1 1 20.25 10.5M8.288 14.212A5.25 5.25 0 1 1 17.25 10.5" />
               </svg>
-            </div>
+            </Link>
             V Tracker
           </div>
         </a>
-
+<Font family="Graduate">
         <div className="mt-12 w-full max-w-lg sm:mt-10 relative top-10">
           <div className="relative -mb-px h-px w-full bg-gradient-to-r from-transparent via-sky-300 to-transparent"></div>
           <div className="mx-5 border border-white/20 shadow-sm lg:rounded-xl lg:shadow-none">
@@ -125,6 +126,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        </Font>
       </div>
     </>
   );

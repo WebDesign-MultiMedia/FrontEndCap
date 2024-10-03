@@ -3,11 +3,16 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Login from './Login';
+import Registers from './Register';
+import Home from './Home';
+import CustomerSupportForm from './CustomerSupport';
+import { Route, Routes } from 'react-router-dom';
+import Font from 'react-font';
 const navigation = [
   { name: 'Home', href: '/Home', current: true },
   { name: 'Expenses', href: '/Expenses', current: false },
-  { name: 'Vids & Img ', href: '/VideoImageLog', current: false },
+  { name: 'Captures ', href: '/VideoImageLog', current: false },
   { name: 'Logs', href: '/vehicleTrackerPage', current: false },
 ];
 
@@ -18,15 +23,16 @@ function classNames(...classes) {
 const Navbar = () => {
   return (
     <>
+    <Font family='Graduate'>
       <nav className="border-gray-200 dark:bg-red-900 bg-black">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-          <a href="https://flowbite.com" className="flex items-center space-x-3 no-underline">
+          <Link to='/Home' className="flex items-center space-x-3 no-underline">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
             <span className="self-center font-semibold whitespace-nowrap dark:text-white text-3xl">V Tracker</span>
-          </a>
+          </Link>
           <div className="hidden sm:flex items-center space-x-6">
             <a href="tel:5541251234" className="text-sm text-gray-100 dark:text-white hover:underline no-underline">(347) 490-5546</a>
-            <a href="#" className="text-md text-blue-600 dark:text-blue-500 hover:underline hover:text-white no-underline">Login</a>
+            <Link to="/CustomerSupport" className="text-md text-blue-600 dark:text-blue-500 hover:underline hover:text-white no-underline">Support Form</Link>
           </div>
         </div>
       </nav>
@@ -39,13 +45,13 @@ const Navbar = () => {
                 {/* Full navigation for medium and large screens */}
                 <div className="hidden sm:flex space-x-6 justify-center">
                   {navigation.map((item) => (
-                    <Link
+                    <Link 
                       key={item.name}
                       to={item.href}
                       className={classNames(
                         item.current
-                          ? 'text-blue-400 dark:text-white sm:text-2xl'
-                          : 'text-blue-400 font-semibold hover:bg-red-600 hover:text-green-300 sm:hover:text-white sm:text-2xl',
+                          ? 'text-blue-400 dark:text-white sm:text-2xl font-thin hover:bg-blue-400 hover:text-white hover:font-bold'
+                          : 'text-blue-400 font-bold hover:bg-red-400 hover:text-white  sm:hover:text-white sm:text-2xl hover:font-thin',
                         'px-2 w-40 text-center no-underline py-2 rounded-md text-lg font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -93,6 +99,14 @@ const Navbar = () => {
           </>
         )}
       </Disclosure>
+      <Routes>
+               <Route path='/Register' element={<Registers/>} />
+               <Route path="/Login" element={<Login/>} />
+               <Route path="/Home" element={<Home/>} />
+    
+                
+                </Routes>
+                </Font>
     </>
   );
 };
