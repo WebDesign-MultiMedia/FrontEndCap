@@ -16,8 +16,6 @@ import Navbar from './components/Navbar';
 import VideoImageLog from './components/VideoImageLog';
 import CustomerSupportForm from './components/CustomerSupport';
 
-// import YourComponent from './components/VinDecoder';
-
 const App = () => {
 
 return(

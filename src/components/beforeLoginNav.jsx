@@ -23,7 +23,7 @@ const HomeNavbar = () => {
   return (
     <>
   
-  <Disclosure as="nav" className="bg-gray-900">
+  <Disclosure as="nav" className="bg-gray-900 h-20">
         {({ open }) => (
           <>
             <div className="max-w-screen-xl px-4 py-3 mx-auto">
@@ -31,13 +31,13 @@ const HomeNavbar = () => {
                 {/* Full navigation for medium and large screens */}
                 <div className="hidden sm:flex space-x-6 justify-center">
                   {navigation.map((item) => (
-                  <Font family='BhuTuka Expanded One'>  <Link
+                  <Font family='Graduate'>  <Link
                       key={item.name}
                       to={item.href}
                       className={classNames(
                         item.current
                           ? 'text-blue-400 dark:text-white sm:text-2xl'
-                          : 'text-blue-400 font-semibold hover:bg-red-600 hover:text-green-300 sm:hover:text-white sm:text-2xl',
+                          : 'text-blue-400  hover:bg-red-600 hover:text-green-300 sm:hover:text-white sm:text-2xl',
                         'px-2 w-40 text-center no-underline py-2 rounded-md text-lg font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}

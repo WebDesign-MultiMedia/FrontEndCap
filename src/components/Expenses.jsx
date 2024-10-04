@@ -166,7 +166,7 @@ const ExpenseTracker = () => {
                     <div className="root mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div id="items" className="space-y-4">
                             <Font family='Josefin Slab'> <h2 className="text-xl font-semibold lg:text-center lg:text-2xl text-white text-center">Expenses</h2></Font>
-                           <Font family='Josefin Slab'>    <table id="table" className="w-full sm:bg-yellow-300 sm:w-6/12 sm:relative sm:left-52 lg:bg-gray-900 lg:text-white lg:font-semibold lg:text-center lg:w-9/12 lg:relative lg:left-40 table-auto border-collapse text-white">
+                           <Font family='Josefin Slab'>    <table id="table" className="w-full sm:bg-gray-800 sm:w-6/12 md:w-full md:relative md:left-0 sm:relative sm:left-52 lg:bg-gray-900 lg:text-white lg:font-semibold lg:text-center lg:w-9/12 lg:relative lg:left-40 table-auto border-collapse text-white">
                                <thead>
                                    <tr className="titles bg-gray-600 text-yellow-400">
                                      <th className="p-1 border">S.no.</th>
@@ -179,7 +179,7 @@ const ExpenseTracker = () => {
                                 <tbody>
                                     {mydata.map((entry, index) => (
                                         <tr key={index} className="hover:bg-red-500 text-lg">
-                                            <td className="relative left-4 border">{index + 1}</td>
+                                            <td className="relative text-center border">{index + 1}</td>
                                             <td className="relative left-4 border">{entry.name}</td>
                                             <td className="relative left-4 border ">${parseFloat(entry.amount).toFixed(2)}</td>
                                             <td className='p-0 border'>{entry.type}</td>
@@ -244,7 +244,7 @@ const ExpenseTracker = () => {
                             >
                                 Add Entry
                             </button>
-                            <iframe width="600" height="546" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRO2mEi3ico8P9rXa-T3uFfF2Dx8r5mVu7rLJ8nhguF9w8sMdBH4esi5QQcoQfyJ8Cr_weZW-Z4MX7e/pubchart?oid=55008347&amp;format=interactive"></iframe>
+                            <iframe  className=' lg:relative lg:left-10  md:relative md:left-32  relative right-12 '  width="600" height="546" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRO2mEi3ico8P9rXa-T3uFfF2Dx8r5mVu7rLJ8nhguF9w8sMdBH4esi5QQcoQfyJ8Cr_weZW-Z4MX7e/pubchart?oid=55008347&amp;format=interactive"></iframe>
                         
                         </div>
                     </div>

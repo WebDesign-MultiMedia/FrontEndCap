@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
 import vd2 from '../assets/getStarted.mp4';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserAlt } from '@fortawesome/free-solid-svg-icons'; // Import the icon you want to use
-import { Link } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import Home from './Home';
-import Navbar from './Navbar';
 import HomeNavbar from './beforeLoginNav';
 
 const Bg = () => {

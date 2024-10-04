@@ -238,7 +238,7 @@ const FuelInfoDeleteBtn = async (id) => {
             <Font family='Josefin Slab'>  <div className="flex text-xl flex-wrap justify-around">
                 {sortedData.map((item, index) => (
                   <div key={index} className="flex-1 min-w-[300px] m-4   p-4 rounded-lg ">
-                     <button onClick={() => ManRepDeleteBtn(item.id)} className=" rounded w-7 relative top-5 right-3 z-10  bg-red-400 ">
+                     <button onClick={() => ManRepDeleteBtn(item.id)} className=" rounded w-7 relative top-5 right-3 z-1  bg-red-400 ">
                       <FontAwesomeIcon icon={faX} className='text-white'/></button>
                       
                     <p className="flex-col items-center text-left  p-3 relative  rounded-2xl bg-gray-900  shadow-inner shadow-gray-400">

@@ -1,10 +1,12 @@
 import React from 'react'
 import BackNav from './beforeLoginNav'
+import { Navbar } from 'react-bootstrap';
+import Navb from './Navbar';
 
 function CustomerSupport() {
   return (
     <>
-<BackNav/>
+<Navb/>
 
     <div className=" sm:p-6 lg:p-8 flex justify-center items-center  bg-black min-h-screen">
       <form
